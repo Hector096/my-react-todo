@@ -1,3 +1,5 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
 .scheduler-container {
   max-height: 78vh;
   overflow-y: scroll;
@@ -11,3 +13,4 @@
 h1 {
   text-decoration: underline;
 }
+

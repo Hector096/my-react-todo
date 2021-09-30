@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
-import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
-import Schedule from "../model/scheduleModel";
+import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
+import TodoModel from "../model/todoModel";
 
-export const AddNewSchedule = (props) => {
+export default function AddTask(props) {
   const minDate = new Date(Date());
   const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
   const [dateTime, setDateTime] = useState("");
   const submit = (e) => {
     e.preventDefault();
-    if (!title || !dateTime) {
+    if (!title || !dateTime || !desc) {
       alert("All the fields should be filled");
     } else {
-      let day = dateTime.getDay();
-      if (day === 0) day = "Sunday";
-      if (day === 1) day = "Monday";
-      if (day === 2) day = "Tuesday";
-      if (day === 3) day = "Wednesday";
-      if (day === 4) day = "Thrusday";
-      if (day === 5) day = "Friday";
-      if (day === 6) day = "Saturday";
-
-      let newSchedule = new Schedule("",title, day, dateTime.toString());
-      newSchedule.addNewSchedule();
+      const newTask = new TodoModel(
+        "",
+        title,
+        desc,
+        dateTime.toString(),
+        false
+      );
+      newTask.addNewTask(props.id);
       setTitle("");
-      setDateTime("");
-      props.onHide(false);
+      setDesc("");
       props.onSave();
+      props.onUpdate()
+      props.onHide(false);
+     
     }
   };
   return (
@@ -35,26 +35,37 @@ export const AddNewSchedule = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      backdrop="static"
+      className="h-75"
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add New Schedule
+          Add New Task
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={submit}>
           <Col className="mb-3">
             <Form.Control
-              placeholder="Schedule Title"
+              placeholder="Task Title"
               value={title}
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
             />
           </Col>
-          <Col>
-            <DateTimePickerComponent
-              placeholder="Choose a date and time"
+          <Col className="mb-3">
+            <Form.Control
+              placeholder="Task Description"
+              value={desc}
+              onChange={(e) => {
+                setDesc(e.target.value);
+              }}
+            />
+          </Col>
+          <Col className="mb-3">
+            <TimePickerComponent
+              placeholder="Choose a time"
               value={dateTime}
               onChange={(e) => {
                 setDateTime(e.target.value);
@@ -62,9 +73,9 @@ export const AddNewSchedule = (props) => {
               min={minDate}
             />
           </Col>
-          <Button type="submit">Add Schedule</Button>
+          <Button type="submit">Add Task</Button>
         </Form>
       </Modal.Body>
     </Modal>
   );
-};
+}
