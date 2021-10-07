@@ -21,7 +21,7 @@ export const AddNewSchedule = (props) => {
       if (day === 5) day = "Friday";
       if (day === 6) day = "Saturday";
 
-      let newSchedule = new Schedule("",title, day, dateTime.toString());
+      let newSchedule = new Schedule("", title, day, dateTime.toString());
       newSchedule.addNewSchedule();
       setTitle("");
       setDateTime("");

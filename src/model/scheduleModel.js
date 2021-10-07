@@ -1,7 +1,7 @@
 import { getData, saveData } from "../components/LocalStorage";
 
 export default class Schedule {
-  constructor(id,title, day, date, imgUrl, taskList) {
+  constructor(id, title, day, date, imgUrl, taskList) {
     this.title = title;
     this.date = date;
     this.day = day;
@@ -9,9 +9,10 @@ export default class Schedule {
     this.imgUrl = imgUrl;
     this.taskList = taskList;
   }
-  
+
   addNewSchedule() {
-    let getUuid = new Date().getTime().toString() + Math.floor(Math.random() * 1000000);
+    let getUuid =
+      new Date().getTime().toString() + Math.floor(Math.random() * 1000000);
     let data = getData();
     const newTask = new Schedule(
       getUuid,
