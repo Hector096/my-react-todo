@@ -1,11 +1,10 @@
 import React from "react";
 import { ScheduleModal } from "./Model";
-import { Button } from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
 export default function Todos({todo,onSave}) {
 
-  const [modalShow, setModalShow] = React.useState(false);
  
 
   return (
@@ -21,21 +20,20 @@ export default function Todos({todo,onSave}) {
           <p className="card-text text-center ">
             Total Tasks :{todo.taskList.length}
           </p>
-          <Button
+          <Link to={`/schedule:${todo.id}`}
             className="btn btn-outline-danger fw-bold"
             variant="none"
-            onClick={() => setModalShow(true)}
+            // onClick={() => setModalShow(true)}
           >
             View Full Schedule
-          </Button>
+          </Link>
         </div>
       </div>
-      <ScheduleModal
+      {/* <ScheduleModal
         onSave = {onSave}
         todo={todo}
         show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+        onHide={() => setModalShow(false)} */}
     </div>
   );
 }

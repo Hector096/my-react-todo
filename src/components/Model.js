@@ -2,12 +2,13 @@ import React from "react";
 import { Modal, Button, Col } from "react-bootstrap";
 import Schedule from "../model/scheduleModel";
 import AddTask from "./AddTask";
-import { getData } from "../components/LocalStorage";
+import { getData , saveData} from "../components/LocalStorage";
 import TodoModel from "../model/todoModel";
 
 export const ScheduleModal = (props) => {
   const [modalShow, setModalShow] = React.useState(false);
   const [data, setData] = React.useState(()=>{let data = getData()
+    // const [desc, setDesc] = React.useState("");
     const index = data.findIndex((item) => item.id === props.todo.id)
     let tasks = data[index].taskList
     return tasks});
@@ -19,7 +20,15 @@ export const ScheduleModal = (props) => {
    setData(tasks)
  } 
  
-
+//  const onUpdate = (id)=>{
+//   let data = getData()
+//   const index = data.findIndex((item) => item.id === props.todo.id)
+//   let tasks = data[index].taskList
+//   let taskIndex = data[index].taskList.findIndex((item)=>item.id === id)
+//   tasks[taskIndex].desc = desc;
+//   saveData(data)
+//   updateTask()
+//  }
 
   const onDeleteSchedule = () => {
     let item = new Schedule(props.todo.id);
@@ -63,7 +72,8 @@ export const ScheduleModal = (props) => {
             return (
               <>
           <Col className="d-flex justify-content-between align-items-center" key={item.id}>
-            <input className="p-2 border-0" placeholder={item.title} />
+            <input className="p-2 border-0" placeholder={item.title} type='text'  />
+              <p className="align-self-center">{ props.todo.date.split(" ")[4]}</p>
             <i className="far fa-trash-alt text-danger" onClick = {()=>{taskDelete(item.id)}}></i>
           </Col>
             </>

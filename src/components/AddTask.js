@@ -4,7 +4,6 @@ import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import TodoModel from "../model/todoModel";
 
 export default function AddTask(props) {
-  const minDate = new Date(Date());
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [dateTime, setDateTime] = useState("");
@@ -70,7 +69,6 @@ export default function AddTask(props) {
               onChange={(e) => {
                 setDateTime(e.target.value);
               }}
-              min={minDate}
             />
           </Col>
           <Button type="submit">Add Task</Button>

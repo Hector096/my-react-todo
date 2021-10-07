@@ -15,7 +15,6 @@ export default function Scheduler() {
     return (
       <>
         <h1 className="text-center p-5 title-heading fw-bold">My Scheduler</h1>
-  
         {data.length !== 0 ? (
           <div className="container d-flex justify-content-lg-center justify-content-center flex-wrap gap-4 scheduler-container mt-3">
             {data.map((todo) => {
