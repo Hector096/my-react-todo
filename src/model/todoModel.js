@@ -1,7 +1,7 @@
 import { getData, saveData } from "../components/LocalStorage";
 
 export default class TodoModel {
-  constructor(id, title, desc, scheduleTime,isCompleted) {
+  constructor(id, title, desc, scheduleTime, isCompleted) {
     this.id = id;
     this.title = title;
     this.desc = desc;
@@ -27,10 +27,10 @@ export default class TodoModel {
   removeTask(id) {
     let data = getData();
     const index = data.findIndex((item) => item.id === id);
-    let taskList = data[index].taskList
-    console.log(taskList)
+    let taskList = data[index].taskList;
+    console.log(taskList);
     const taskIndex = taskList.findIndex((item) => item.id === this.id);
-    console.log(taskIndex)
+    console.log(taskIndex);
     taskList.splice(taskIndex, 1);
     saveData(data);
   }

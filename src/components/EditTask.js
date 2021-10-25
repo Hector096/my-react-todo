@@ -1,27 +1,25 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
 import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
-import TodoModel from "../model/todoModel";
+import { getData, saveData } from "../components/LocalStorage";
 
-export default function AddTask(props) {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [dateTime, setDateTime] = useState("");
+export default function EditTask(props) {
+  const [title, setTitle] = useState(props.data.title);
+  const [desc, setDesc] = useState(props.data.desc);
+  const [dateTime, setDateTime] = useState(props.data.scheduleTime);
   const submit = (e) => {
     e.preventDefault();
     if (!title || !dateTime || !desc) {
       alert("All the fields should be filled");
     } else {
-      const newTask = new TodoModel(
-        "",
-        title,
-        desc,
-        dateTime.toString(),
-        false
-      );
-      newTask.addNewTask(props.id);
-      setTitle("");
-      setDesc("");
+      let data = getData();
+      const index = data.findIndex((item) => item.id === props.id);
+      let taskList = data[index].taskList;
+      const taskIndex = taskList.findIndex((item) => item.id === props.data.id);
+      taskList[taskIndex].title = title;
+      taskList[taskIndex].desc = desc;
+      taskList[taskIndex].scheduleTime = dateTime.toString();
+      saveData(data);
       props.onUpdate();
       props.onHide(false);
     }
@@ -36,9 +34,7 @@ export default function AddTask(props) {
       className="h-75"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add New Task
-        </Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Edit Task</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={submit}>
@@ -69,7 +65,9 @@ export default function AddTask(props) {
               }}
             />
           </Col>
-          <Button type="submit">Add Task</Button>
+          <Button type="submit" className="bg-success">
+            Save
+          </Button>
         </Form>
       </Modal.Body>
     </Modal>
