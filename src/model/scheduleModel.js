@@ -1,4 +1,4 @@
-import { getData, saveData } from "../components/LocalStorage";
+import { getData, saveData } from '../components/LocalStorage';
 
 export default class Schedule {
   constructor(id, title, day, date, imgUrl, taskList) {
@@ -11,20 +11,20 @@ export default class Schedule {
   }
 
   addNewSchedule() {
-    let getUuid =
-      new Date().getTime().toString() + Math.floor(Math.random() * 1000000);
-    let data = getData();
+    const getUuid = new Date().getTime().toString() + Math.floor(Math.random() * 1000000);
+    const data = getData();
     const newTask = new Schedule(
       getUuid,
       this.title,
       this.day,
       this.date,
-      "https://images.unsplash.com/photo-1554147090-e1221a04a025?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1148&q=80",
-      []
+      'https://images.unsplash.com/photo-1554147090-e1221a04a025?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1148&q=80',
+      [],
     );
     data.push(newTask);
     saveData(data);
   }
+
   removeSchedule() {
     const data = getData();
     const index = data.findIndex((item) => item.id === this.id);

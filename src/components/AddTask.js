@@ -1,34 +1,37 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Col } from "react-bootstrap";
-import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
-import TodoModel from "../model/todoModel";
+import React, { useState } from 'react';
+import {
+  Modal, Button, Form, Col,
+} from 'react-bootstrap';
+import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { PropTypes } from 'prop-types';
+import TodoModel from '../model/todoModel';
 
 export default function AddTask(props) {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [dateTime, setDateTime] = useState("");
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [dateTime, setDateTime] = useState('');
   const submit = (e) => {
     e.preventDefault();
     if (!title || !dateTime || !desc) {
-      alert("All the fields should be filled");
+      alert('All the fields should be filled'); // eslint-disable-line 
     } else {
       const newTask = new TodoModel(
-        "",
+        '',
         title,
         desc,
         dateTime.toString(),
-        false
+        false,
       );
       newTask.addNewTask(props.id);
-      setTitle("");
-      setDesc("");
+      setTitle('');
+      setDesc('');
       props.onUpdate();
       props.onHide(false);
     }
   };
   return (
     <Modal
-      {...props}
+      {...props} // eslint-disable-line 
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -75,3 +78,9 @@ export default function AddTask(props) {
     </Modal>
   );
 }
+
+AddTask.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+};

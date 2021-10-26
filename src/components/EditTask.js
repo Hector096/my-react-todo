@@ -1,32 +1,38 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Col } from "react-bootstrap";
-import { TimePickerComponent } from "@syncfusion/ej2-react-calendars";
-import { getData, saveData } from "../components/LocalStorage";
+import React, { useState } from 'react';
+import {
+  Modal, Button, Form, Col,
+} from 'react-bootstrap';
+import { TimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { PropTypes } from 'prop-types';
+import { getData, saveData } from './LocalStorage';
 
 export default function EditTask(props) {
-  const [title, setTitle] = useState(props.data.title);
-  const [desc, setDesc] = useState(props.data.desc);
-  const [dateTime, setDateTime] = useState(props.data.scheduleTime);
+  const {
+    taskupdate, data, id, onHide,
+  } = props;
+  const [title, setTitle] = useState(data.title);
+  const [desc, setDesc] = useState(data.desc);
+  const [dateTime, setDateTime] = useState(data.scheduleTime);
   const submit = (e) => {
     e.preventDefault();
     if (!title || !dateTime || !desc) {
-      alert("All the fields should be filled");
+      alert('All the fields should be filled'); // eslint-disable-line 
     } else {
-      let data = getData();
-      const index = data.findIndex((item) => item.id === props.id);
-      let taskList = data[index].taskList;
-      const taskIndex = taskList.findIndex((item) => item.id === props.data.id);
+      const schedule = getData();
+      const index = schedule.findIndex((item) => item.id === id);
+      const { taskList } = schedule[index];
+      const taskIndex = taskList.findIndex((item) => item.id === data.id);
       taskList[taskIndex].title = title;
       taskList[taskIndex].desc = desc;
       taskList[taskIndex].scheduleTime = dateTime.toString();
       saveData(data);
-      props.onUpdate();
-      props.onHide(false);
+      taskupdate();
+      onHide(false, '');
     }
   };
   return (
     <Modal
-      {...props}
+      {...props} // eslint-disable-line 
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -73,3 +79,15 @@ export default function EditTask(props) {
     </Modal>
   );
 }
+
+EditTask.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  taskupdate: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    scheduleTime: PropTypes.string.isRequired,
+  }).isRequired,
+};

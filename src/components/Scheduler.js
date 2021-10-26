@@ -1,8 +1,8 @@
-import React from "react";
-import Todo from "../components/Todos";
-import { Button } from "react-bootstrap";
-import { AddNewSchedule } from "./AddNewSchedule";
-import { getData } from "../components/LocalStorage";
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import Todo from './Todos';
+import AddNewSchedule from './AddNewSchedule';
+import { getData } from './LocalStorage';
 
 export default function Scheduler() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -16,9 +16,7 @@ export default function Scheduler() {
       <h1 className="text-center p-5 title-heading fw-bold">My Scheduler</h1>
       {data.length !== 0 ? (
         <div className="container d-flex justify-content-lg-center justify-content-center flex-wrap gap-4 scheduler-container mt-3">
-          {data.map((todo) => {
-            return <Todo key={todo.id} todo={todo} onSave={changeDataState} />;
-          })}
+          {data.map((todo) => <Todo key={todo.id} todo={todo} onSave={changeDataState} />)}
         </div>
       ) : (
         <h2 className="text-center fw-bold">No Schedule Found..</h2>
@@ -32,7 +30,7 @@ export default function Scheduler() {
       </Button>
       <AddNewSchedule
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={(val) => setModalShow(val)}
         onSave={changeDataState}
       />
     </>

@@ -1,37 +1,40 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Col } from "react-bootstrap";
-import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
-import Schedule from "../model/scheduleModel";
+import React, { useState } from 'react';
+import {
+  Modal, Button, Form, Col,
+} from 'react-bootstrap';
+import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { PropTypes } from 'prop-types';
+import Schedule from '../model/scheduleModel';
 
-export const AddNewSchedule = (props) => {
+export default function AddNewSchedule(props) {
   const minDate = new Date(Date());
-  const [title, setTitle] = useState("");
-  const [dateTime, setDateTime] = useState("");
+  const [title, setTitle] = useState('');
+  const [dateTime, setDateTime] = useState('');
   const submit = (e) => {
     e.preventDefault();
     if (!title || !dateTime) {
-      alert("All the fields should be filled");
+      alert('All the fields should be filled'); // eslint-disable-line no-alert
     } else {
       let day = dateTime.getDay();
-      if (day === 0) day = "Sunday";
-      if (day === 1) day = "Monday";
-      if (day === 2) day = "Tuesday";
-      if (day === 3) day = "Wednesday";
-      if (day === 4) day = "Thrusday";
-      if (day === 5) day = "Friday";
-      if (day === 6) day = "Saturday";
+      if (day === 0) day = 'Sunday';
+      if (day === 1) day = 'Monday';
+      if (day === 2) day = 'Tuesday';
+      if (day === 3) day = 'Wednesday';
+      if (day === 4) day = 'Thrusday';
+      if (day === 5) day = 'Friday';
+      if (day === 6) day = 'Saturday';
 
-      let newSchedule = new Schedule("", title, day, dateTime.toString());
+      const newSchedule = new Schedule('', title, day, dateTime.toString());
       newSchedule.addNewSchedule();
-      setTitle("");
-      setDateTime("");
+      setTitle('');
+      setDateTime('');
       props.onHide(false);
       props.onSave();
     }
   };
   return (
     <Modal
-      {...props}
+    {...props} // eslint-disable-line 
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -67,4 +70,8 @@ export const AddNewSchedule = (props) => {
       </Modal.Body>
     </Modal>
   );
+}
+AddNewSchedule.propTypes = {
+  onHide: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };

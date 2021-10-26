@@ -1,7 +1,7 @@
-import Scheduler from "./components//Scheduler";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Schedule from "./components/Schedule";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Scheduler from './components/Scheduler';
+import './App.css';
+import Schedule from './components/Schedule';
 
 function App() {
   return (
