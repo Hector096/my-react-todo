@@ -8,7 +8,7 @@ import { getData, saveData } from './LocalStorage';
 
 export default function EditTask(props) {
   const {
-    taskupdate, data, id, onHide,
+    taskUpdate, data, id, onHide,
   } = props;
   const [title, setTitle] = useState(data.title);
   const [desc, setDesc] = useState(data.desc);
@@ -26,7 +26,7 @@ export default function EditTask(props) {
       taskList[taskIndex].desc = desc;
       taskList[taskIndex].scheduleTime = dateTime.toString();
       saveData(data);
-      taskupdate();
+      taskUpdate();
       onHide(false, '');
     }
   };
@@ -82,7 +82,7 @@ export default function EditTask(props) {
 
 EditTask.propTypes = {
   onHide: PropTypes.func.isRequired,
-  taskupdate: PropTypes.func.isRequired,
+  taskUpdate: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
