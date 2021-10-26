@@ -3,6 +3,12 @@
 This is a Powerful Scheduler app to manage tasks and schedules.
 
 ---
+## Screenshots
+![screenshot](./assets/screenshot1.png)
+![screenshot](./assets/screenshot2.png)
+![screenshot](./assets/screenshot3.png)
+![screenshot](./assets/screenshot4.png)
+
 
 ## Built With
 
