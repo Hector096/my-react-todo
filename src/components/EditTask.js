@@ -82,7 +82,7 @@ export default function EditTask(props) {
 
 EditTask.propTypes = {
   onHide: PropTypes.func.isRequired,
-  taskupdate: PropTypes.func.isRequired,
+  taskUpdate: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
