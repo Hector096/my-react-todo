@@ -77,7 +77,7 @@ export default function ScheduleComponent() {
                   id={id}
                   data={item}
                   show={modalUpdate === true && modalKeys === item.id}
-                  taskupdate={updateTask}
+                  taskUpdate={updateTask}
                   onHide={() => {
                     setModalUpdate(false);
                     setModalKeys('');
