@@ -1,0 +1,15 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
+.scheduler-container {
+  max-height: 78vh;
+  overflow-y: scroll;
+}
+
+.todo-card {
+  max-width: 18rem;
+  border: none;
+}
+
+h1 {
+  text-decoration: underline;
+}
